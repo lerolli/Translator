@@ -17,18 +17,21 @@ public class JavaLang implements ILanguage {
         var counter = 0;
         var isUpdate = false;
         var arrayString = string.split("[ \r\n\t]");
-        while (counter != arrayString.length) {
+        while (counter < arrayString.length) {
 
-            if (arrayString[counter] != "") {
+            if (arrayString[counter] == "")
+                counter++;
+            else {
                 for (ITranslator iTranslator : translatorList) {
-
-                    var token = iTranslator.tokenize(arrayString[counter], counter);
-                    if (token != null) {
-                        tokenList.add(token);
+                    var tuple = iTranslator.tokenize(arrayString, counter);
+                    if (tuple != null) {
+                        tokenList.add(tuple.token);
+                        counter = tuple.count;
                         isUpdate = true;
+                        if (counter >= arrayString.length)
+                            break;
                     }
                 }
-
                 if (isUpdate)
                     isUpdate = false;
                 else
@@ -36,7 +39,6 @@ public class JavaLang implements ILanguage {
             }
         }
             return (Token[]) tokenList.toArray();
-
     }
 
     public String translateToken(Token[] a) {

@@ -46,8 +46,13 @@ public class main {
 
         ILanguage java = new JavaLang();
         java.register(new JavaForTranslator());
-        java.register(new JavavVarTranslator());
-
+        java.register(new JavaVarTranslator());
+        java.register(new JavaClassTranslator());
+        java.register(new JavaOpenBracketTranslator());
+        java.register(new JavaMethodTranslator());
+        java.register(new JavaVariableTranslator());
+        java.register(new JavaCloseBracketTranslation());
+        java.register(new JavaPrintTranslation());
         tr.register("pascal", pascal);
         tr.register("java", java);
 
