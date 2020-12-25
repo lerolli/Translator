@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 
 public class Token {
+    String nameTranslator;
     Boolean isPublic;
     Boolean isStatic;
     String variable;
@@ -14,4 +15,6 @@ public class Token {
     public Token(){
         childrenTokens = new ArrayList<>();
     }
+
+
 }

@@ -5,6 +5,7 @@ public class JavaCloseBracketTranslation implements ITranslator {
             var openBracketToken = new Token();
             openBracketToken.variable = "}";
             count++;
+            openBracketToken.nameTranslator = "closeBracket";
             return new Tuple(openBracketToken, count);
         }
         return null;

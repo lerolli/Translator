@@ -11,6 +11,8 @@ public class JavaClassTranslator implements ITranslator {
         else
             return null;
 
+        tokenClass.nameTranslator = "class";
+
         if (string[count].equals("static")){
             tokenClass.isStatic = true;
             count++;

@@ -44,6 +44,7 @@ public class JavaMethodTranslator implements ITranslator {
                 childrenToken.name = string[count].split("\\)")[0];
                 tokenMethod.childrenTokens.add(childrenToken);
                 count++;
+                tokenMethod.nameTranslator = "method";
                 return new Tuple(tokenMethod, count);
             }
 

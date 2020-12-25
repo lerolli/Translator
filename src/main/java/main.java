@@ -32,17 +32,24 @@ public class main {
 
     public static void main(String[] args){
 
-        Scanner scanner = new Scanner(System.in);
-        System.out.print("Input the full path to the program file: ");
-        //String fullPath = scanner.nextLine();
-        var fullPath = "C:\\Users\\zahar\\Documents\\temp.txt";
-        scanner.close();
-        String source = getTextFromFile(fullPath);
-
+        //Scanner scanner = new Scanner(System.in);
+        //System.out.print("Input the full path to the program file: ");
+        //String fullPathJava = scanner.nextLine();
+        String fullPathJava = "C:\\Users\\zahar\\Desktop\\Translator\\src\\main\\javaprogram.txt";
+        //scanner.close();
+        String sourceJava = getTextFromFile(fullPathJava);
+        String fullPathPascal = "C:\\Users\\zahar\\Desktop\\Translator\\src\\main\\pascalprogram.txt";
+        String sourcePascal = getTextFromFile(fullPathPascal);
         Translator tr = new Translator();
+
         ILanguage pascal = new PascalLang();
         pascal.register(new PascalForTranslator());
         pascal.register(new PascalVarTranslator());
+        pascal.register(new PascalVariableTranslation());
+        pascal.register(new PascalPrintTranslation());
+        pascal.register(new PascalOpenBracketsTranslation());
+        pascal.register(new PascalCloseBracketsTranslation());
+
 
         ILanguage java = new JavaLang();
         java.register(new JavaForTranslator());
@@ -56,7 +63,9 @@ public class main {
         tr.register("pascal", pascal);
         tr.register("java", java);
 
-        String tokens = tr.translate("java", "pascal", source);
-        System.out.println(tokens);
+       // String pascalText = tr.translate("java", "pascal", sourceJava);
+        String javaText = tr.translate("pascal", "java", sourcePascal);
+        //System.out.println(pascalText);
+        System.out.println(javaText);
     }
 }

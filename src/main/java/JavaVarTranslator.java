@@ -17,8 +17,9 @@ public class JavaVarTranslator implements ITranslator{
         count++;
         tokenVar.name = string[count];
         count+=2;
-        tokenVar.ReturnedVariable = string[count];
+        tokenVar.ReturnedVariable = string[count].split(";")[0];
         count++;
+        tokenVar.nameTranslator = "var";
         return new Tuple(tokenVar, count);
     }
 }

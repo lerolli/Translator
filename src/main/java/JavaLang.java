@@ -12,8 +12,8 @@ public class JavaLang implements ILanguage {
         translatorList.add(iTranslator);
     }
 
-    public Token[] translateString(String string) {
-        var tokenList = new ArrayList<>();
+    public ArrayList<Token> translateString(String string) {
+        var tokenList = new ArrayList<Token>();
         var counter = 0;
         var isUpdate = false;
         var arrayString = string.split("[ \r\n\t]");
@@ -38,10 +38,10 @@ public class JavaLang implements ILanguage {
                     return null;
             }
         }
-            return (Token[]) tokenList.toArray();
+            return tokenList;
     }
 
-    public String translateToken(Token[] a) {
+    public String translateToken(ArrayList<Token> a) {
         return null;
     }
 }
