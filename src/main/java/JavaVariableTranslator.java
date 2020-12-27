@@ -9,14 +9,13 @@ public class JavaVariableTranslator implements ITranslator{
         var variableToken = new Token();
         variableToken.variable = string[count];
         count+=2;
+        var stringBuilder = new StringBuilder();
         while (!string[count].contains(";")) {
-            if (variableToken.ReturnedVariable == null)
-                variableToken.ReturnedVariable = string[count] + " ";
-            else
-                variableToken.ReturnedVariable += string[count] + " ";
+            stringBuilder.append(string[count] + " ");
             count++;
         }
-        variableToken.ReturnedVariable += string[count].split(";")[0];
+        stringBuilder.append(string[count].split(";")[0]);
+        variableToken.ReturnedVariable = stringBuilder.toString();
         count++;
         variableToken.nameTranslator = "variable";
         return new Tuple(variableToken, count);

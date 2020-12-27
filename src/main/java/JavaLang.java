@@ -19,7 +19,7 @@ public class JavaLang implements ILanguage {
         var arrayString = string.split("[ \r\n\t]");
         while (counter < arrayString.length) {
 
-            if (arrayString[counter] == "")
+            if (arrayString[counter].equals(""))
                 counter++;
             else {
                 for (ITranslator iTranslator : translatorList) {
@@ -41,7 +41,41 @@ public class JavaLang implements ILanguage {
             return tokenList;
     }
 
-    public String translateToken(ArrayList<Token> a) {
-        return null;
+
+
+    public String translateToken(ArrayList<Token> arrayToken) {
+
+        var resultString = new StringBuilder();
+        resultString.append("public class JavaResult { \n");
+        resultString.append("\n");
+        resultString.append("public static void main() { \n");
+        for (Token token : arrayToken) {
+            switch (token.nameTranslator) {
+                case "for":
+                    resultString.append("for (").append(token.variable).append(" ").append(token.name).append(" = ")
+                                .append(token.minValueFor).append("; ").append(token.name).append("<=")
+                                .append(token.maxValueFor).append("; ").append(token.name).append("++) ");
+                    break;
+                case "print":
+                    resultString.append("System.out.println(").append(token.variable).append("); \n");
+                    break;
+                case "variable":
+                    resultString.append(token.variable).append(" = ").append(token.ReturnedVariable).append("; \n");
+                    break;
+                case "var":
+                    resultString.append("var ").append(token.name).append(" = ")
+                            .append(token.ReturnedVariable).append("; \n");
+                    break;
+                case "openBracket":
+                    resultString.append("{ \n");
+                    break;
+                case "closeBracket":
+                    resultString.append("}\n");
+            }
+        }
+        resultString.append("} \n");
+        resultString.append("}");
+
+        return resultString.toString();
     }
 }

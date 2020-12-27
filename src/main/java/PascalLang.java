@@ -15,9 +15,9 @@ public class PascalLang implements ILanguage {
         var tokenList = new ArrayList<Token>();
         var counter = 0;
         var isUpdate = false;
-        var arrayString = string.split("[\n\r]");
+        var arrayString = string.split("[ \n\r]");
         while (counter < arrayString.length) {
-            if (arrayString[counter] == "")
+            if (arrayString[counter].equals(""))
                 counter++;
             else {
                 for (ITranslator iTranslator : translatorList) {
@@ -44,13 +44,9 @@ public class PascalLang implements ILanguage {
         resultString.append("Begin \n");
         for (Token token : arrayToken) {
             switch (token.nameTranslator) {
-                case "class":
-                case "method":
-                    continue;
                 case "for":
-                    resultString.append("var ").append(token.name).append(" := 0; \n");
-                    resultString.append("for ").append(token.name).append(" := ").append(token.minValueFor)
-                                .append(" to ").append(token.maxValueFor).append(" do \n");
+                    resultString.append("for ").append("var ").append(token.name).append(" := ")
+                                .append(token.minValueFor).append(" to ").append(token.maxValueFor).append(" do \n");
                     break;
                 case "print":
                     resultString.append("writeln(").append(token.ReturnedVariable).append(") \n");
@@ -70,6 +66,7 @@ public class PascalLang implements ILanguage {
             }
         }
         resultString.append("end.");
+
         return resultString.toString();
     }
 }
