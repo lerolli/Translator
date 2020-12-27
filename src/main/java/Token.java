@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 
 public class Token {
     String nameTranslator;
@@ -8,11 +7,7 @@ public class Token {
     String minValueFor;
     String maxValueFor;
     String step;
-    ArrayList<Token> childrenTokens;
 
-    public Token(){
-        childrenTokens = new ArrayList<>();
-    }
 
 
 }

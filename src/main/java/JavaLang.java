@@ -17,8 +17,8 @@ public class JavaLang implements ILanguage {
         var counter = 0;
         var isUpdate = false;
         var arrayString = string.split("[ \r\n\t]");
+        arrayString = removeEmptyCells(arrayString);
         while (counter < arrayString.length) {
-
             if (arrayString[counter].equals(""))
                 counter++;
             else {
@@ -41,6 +41,22 @@ public class JavaLang implements ILanguage {
             return tokenList;
     }
 
+    private String[] removeEmptyCells(String[] arrayString) {
+        var listString = new ArrayList<String>();
+        for (String str : arrayString){
+            if (!str.equals(""))
+                listString.add(str);
+        }
+        return toArray(listString);
+    }
+
+    private String[] toArray(ArrayList<String> listString) {
+        var arrayString = new String[listString.size()];
+        for (int i = 0; i < listString.size(); i++) {
+            arrayString[i] = listString.get(i);
+        }
+        return arrayString;
+    }
 
 
     public String translateToken(ArrayList<Token> arrayToken) {

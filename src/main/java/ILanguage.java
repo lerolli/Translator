@@ -1,7 +1,10 @@
 import java.util.ArrayList;
 
 public interface ILanguage {
-    public void register(ITranslator a);
-    public ArrayList<Token> translateString(String a);
-    public String translateToken(ArrayList<Token> a);
+    void register(ITranslator a);
+
+
+    ArrayList<Token> translateString(String a);
+
+    String translateToken(ArrayList<Token> a);
 }
