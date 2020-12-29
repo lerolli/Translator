@@ -6,7 +6,7 @@ public class PascalForTranslator implements ITranslator {
         var tokenFor = new Token();
         tokenFor.nameTranslator = "for";
         count += 1;
-        tokenFor.variable = string[count];
+        tokenFor.variableType = string[count];
         count++;
         tokenFor.name = string[count];
         count += 2;

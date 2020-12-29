@@ -7,7 +7,7 @@ public class JavaClassTranslator implements ITranslator {
         if (!(string[count].equals("public") && string[count + 1].equals("class")))
             return null;
 
-        count+=3;
+        count+=4;
         var t = new Token();
         t.nameTranslator = "0";
         return new Tuple(t, count);

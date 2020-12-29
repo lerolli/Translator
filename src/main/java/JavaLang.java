@@ -16,34 +16,32 @@ public class JavaLang implements ILanguage {
         var tokenList = new ArrayList<Token>();
         var counter = 0;
         var isUpdate = false;
-        var arrayString = string.split("[ \r\n\t]");
-        arrayString = removeEmptyCells(arrayString);
+
+        var arrayString = createArray(string);
+        var count = arrayString.length;
         while (counter < arrayString.length) {
-            if (arrayString[counter].equals(""))
-                counter++;
-            else {
-                for (ITranslator iTranslator : translatorList) {
-                    var tuple = iTranslator.tokenize(arrayString, counter);
-                    if (tuple != null) {
-                        tokenList.add(tuple.token);
-                        counter = tuple.count;
-                        isUpdate = true;
-                        if (counter >= arrayString.length)
-                            break;
-                    }
+            for (ITranslator iTranslator : translatorList) {
+                var tuple = iTranslator.tokenize(arrayString, counter);
+                if (tuple != null) {
+                    tokenList.add(tuple.token);
+                    counter = tuple.count;
+                    isUpdate = true;
+                    if (counter >= arrayString.length)
+                        break;
                 }
-                if (isUpdate)
-                    isUpdate = false;
-                else
-                    return null;
             }
+            if (isUpdate)
+                isUpdate = false;
+            else
+                return null;
         }
-            return tokenList;
+        return tokenList;
     }
 
-    private String[] removeEmptyCells(String[] arrayString) {
+    private String[] createArray(String string) {
+        var arrayString = string.split("[ \r\n\t]");
         var listString = new ArrayList<String>();
-        for (String str : arrayString){
+        for (String str : arrayString) {
             if (!str.equals(""))
                 listString.add(str);
         }
@@ -51,47 +49,46 @@ public class JavaLang implements ILanguage {
     }
 
     private String[] toArray(ArrayList<String> listString) {
-        var arrayString = new String[listString.size()];
-        for (int i = 0; i < listString.size(); i++) {
+        var arrayString = new String[listString.size() - 2];
+        for (int i = 0; i < listString.size() - 2; i++) {
             arrayString[i] = listString.get(i);
         }
         return arrayString;
     }
 
-
     public String translateToken(ArrayList<Token> arrayToken) {
 
-        var resultString = new StringBuilder();
-        resultString.append("public class JavaResult { \n");
-        resultString.append("\n");
-        resultString.append("public static void main() { \n");
+        var stringBuilder = new StringBuilder();
+        stringBuilder.append("public class JavaResult { \n ");
+        stringBuilder.append("\n");
+        stringBuilder.append("public static void main() ");
         for (Token token : arrayToken) {
             switch (token.nameTranslator) {
                 case "for":
-                    resultString.append("for (").append(token.variable).append(" ").append(token.name).append(" = ")
-                                .append(token.minValueFor).append("; ").append(token.name).append("<=")
-                                .append(token.maxValueFor).append("; ").append(token.name).append("++) ");
+                    stringBuilder.append("for (").append(token.variableType).append(" ").append(token.name).append(" = ")
+                            .append(token.minValueFor).append("; ").append(token.name).append("<=")
+                            .append(token.maxValueFor).append("; ").append(token.name).append("++) ");
                     break;
                 case "print":
-                    resultString.append("System.out.println(").append(token.variable).append("); \n");
+                    stringBuilder.append("System.out.println(").append(token.variableType).append("); \n");
                     break;
                 case "variable":
-                    resultString.append(token.variable).append(" = ").append(token.ReturnedVariable).append("; \n");
+                    stringBuilder.append(token.variableType).append(" = ").append(token.returnedVariable).append("; \n");
                     break;
                 case "var":
-                    resultString.append("var ").append(token.name).append(" = ")
-                            .append(token.ReturnedVariable).append("; \n");
+                    stringBuilder.append("var ").append(token.name).append(" = ")
+                            .append(token.returnedVariable).append("; \n");
                     break;
                 case "openBracket":
-                    resultString.append("{ \n");
+                    stringBuilder.append("{ \n");
                     break;
                 case "closeBracket":
-                    resultString.append("}\n");
+                    stringBuilder.append("} \n");
             }
         }
-        resultString.append("} \n");
-        resultString.append("}");
-
-        return resultString.toString();
+        stringBuilder.append("} \n");
+        stringBuilder.append("}");
+        return stringBuilder.toString();
     }
 }
+

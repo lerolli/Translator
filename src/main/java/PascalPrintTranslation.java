@@ -5,7 +5,7 @@ public class PascalPrintTranslation implements ITranslator {
             return null;
         var printToken = new Token();
         printToken.nameTranslator = "print";
-        printToken.variable = string[count].split("\\(")[1].split("\\)")[0];
+        printToken.variableType = string[count].split("\\(")[1].split("\\)")[0];
         count++;
         return new Tuple(printToken, count);
     }

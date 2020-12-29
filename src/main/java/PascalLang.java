@@ -39,6 +39,7 @@ public class PascalLang implements ILanguage {
         return tokenList;
     }
 
+
     public String translateToken(ArrayList<Token> arrayToken) {
         var resultString = new StringBuilder();
         resultString.append("Begin \n");
@@ -49,14 +50,14 @@ public class PascalLang implements ILanguage {
                                 .append(token.minValueFor).append(" to ").append(token.maxValueFor).append(" do \n");
                     break;
                 case "print":
-                    resultString.append("writeln(").append(token.ReturnedVariable).append(") \n");
+                    resultString.append("writeln(").append(token.returnedVariable).append(") \n");
                     break;
                 case "variable":
-                    resultString.append(token.variable).append(" := ").append(token.ReturnedVariable).append("; \n");
+                    resultString.append(token.variableType).append(" := ").append(token.returnedVariable).append("; \n");
                     break;
                 case "var":
                     resultString.append("var ").append(token.name).append(" := ")
-                                .append(token.ReturnedVariable).append("; \n");
+                                .append(token.returnedVariable).append("; \n");
                     break;
                 case "openBracket":
                     resultString.append("Begin \n");

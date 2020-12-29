@@ -31,8 +31,8 @@ public class Translator{
         var languageOutput = languageDictionary.get(outputLanguage);
 
         var tokenArrayList =  languageInput.translateString(str);
-        var strOutputLanguage = languageOutput.translateToken(tokenArrayList);
+        if (tokenArrayList == null) throw new NullPointerException();
 
-        return strOutputLanguage;
+        return languageOutput.translateToken(tokenArrayList);
     }
 }

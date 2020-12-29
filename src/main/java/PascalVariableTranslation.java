@@ -7,16 +7,16 @@ public class PascalVariableTranslation implements ITranslator {
             return null;
         var variableToken = new Token();
         variableToken.nameTranslator = "variable";
-        variableToken.variable = string[count];
+        variableToken.variableType = string[count];
         count+= 2;
         while (!string[count].contains(";")) {
-            if (variableToken.ReturnedVariable == null)
-                variableToken.ReturnedVariable = string[count] + " ";
+            if (variableToken.returnedVariable == null)
+                variableToken.returnedVariable = string[count] + " ";
             else
-                variableToken.ReturnedVariable += string[count] + " ";
+                variableToken.returnedVariable += string[count] + " ";
             count++;
         }
-        variableToken.ReturnedVariable += string[count].split(";")[0];
+        variableToken.returnedVariable += string[count].split(";")[0];
         count++;
         return new Tuple(variableToken, count);
     }

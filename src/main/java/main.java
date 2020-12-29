@@ -51,11 +51,11 @@ public class main {
 
         ILanguage java = new JavaLang();
         java.register(new JavaForTranslator());
-        java.register(new JavaVarTranslator());
+        java.register(new JavaCreateVariableTranslator());
         java.register(new JavaClassTranslator());
         java.register(new JavaMethodTranslator());
-        java.register(new JavaVariableTranslator());
-        java.register(new JavaPrintTranslation());
+        java.register(new JavaChangeVariableValueTranslator());
+        java.register(new JavaPrintTranslator());
         java.register(new JavaOpenBracketTranslator());
         java.register(new JavaCloseBracketTranslation());
 
@@ -63,8 +63,9 @@ public class main {
         tr.register("java", java);
 
         String pascalText = tr.translate("java", "pascal", sourceJava);
-        //String javaText = tr.translate("pascal", "java", sourcePascal);
+        String javaText = tr.translate("pascal", "java", pascalText);
+        System.out.println(sourceJava);
         System.out.println(pascalText);
-        //System.out.println(javaText);
+        System.out.println(javaText);
     }
 }

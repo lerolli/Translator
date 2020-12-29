@@ -1,10 +1,12 @@
 public class JavaForTranslator implements ITranslator {
 
     public Tuple tokenize(String[] string, int count) {
+
         if (!string[count].equals("for"))
             return null;
 
         var tokenFor = new Token();
+        tokenFor.nameTranslator = "for";
         count+=2;
         tokenFor.name = string[count];
         count+=2;
@@ -14,7 +16,6 @@ public class JavaForTranslator implements ITranslator {
         count++;
         tokenFor.step = string[count].split("\\)")[0];
         count++;
-        tokenFor.nameTranslator = "for";
         return new Tuple(tokenFor, count);
     }
 }

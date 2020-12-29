@@ -4,7 +4,7 @@ public class PascalOpenBracketsTranslation implements ITranslator {
         if (!string[count].equals("Begin"))
             return null;
         var tokenOpenBracket = new Token();
-        tokenOpenBracket.nameTranslator = "open bracket";
+        tokenOpenBracket.nameTranslator = "openBracket";
         count++;
         return new Tuple(tokenOpenBracket, count);
     }

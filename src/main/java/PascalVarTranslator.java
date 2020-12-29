@@ -8,7 +8,7 @@ public class PascalVarTranslator implements ITranslator{
         count++;
         varToken.name = string[count];
         count += 2;
-        varToken.ReturnedVariable = string[count].split(";")[0];
+        varToken.returnedVariable = string[count].split(";")[0];
         count++;
         return new Tuple(varToken, count);
     }
