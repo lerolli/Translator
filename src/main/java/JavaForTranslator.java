@@ -1,17 +1,21 @@
 public class JavaForTranslator implements ITranslator {
 
+    public Tuple tokenize(String[] string, int count) {
 
-    public Token tokenize(String string, int counter) {
-        var temp = counter;
-        for (;counter < string.length(); counter++){
-            var arraystring = string.split(" ");
-                if (arraystring[0] == "for" ){
+        if (!string[count].equals("for"))
+            return null;
 
-                }
-        }
-
-
-        return new Token();
+        var tokenFor = new Token();
+        tokenFor.nameTranslator = "for";
+        count+=2;
+        tokenFor.name = string[count];
+        count+=2;
+        tokenFor.minValueFor = string[count].split(";")[0];
+        count+=3;
+        tokenFor.maxValueFor = string[count].split(";")[0];
+        count++;
+        tokenFor.step = string[count].split("\\)")[0];
+        count++;
+        return new Tuple(tokenFor, count);
     }
-
 }
